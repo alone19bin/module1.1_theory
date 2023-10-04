@@ -1,0 +1,253 @@
+                                                                                      //Chapter05
+
+        //Пример контрукции if else if
+class test {
+    public static void main(String[] args) {
+        int month = 4; //Апрель
+        String season;
+        if (month == 12 || month == 1 || month == 2)
+            season = " зиме ";
+        else if (month == 3 || month == 4 || month == 5)
+                season = " весне ";
+        else if (month == 6 || month == 7 || month == 8)
+                season = "лету";
+        else if (month == 9 || month == 10 || month == 11)
+                season = " осени " ;
+else
+        season = " вымышленным месяцам" ;
+        System.out.println("Aпpeль относится к"+ season + "." ) ;
+    }
+}
+        /* Вывод:   Aпpeль относится к весне .  */
+
+
+    //Пример оператора switch
+class test {
+    public static void main(String[] args) {
+        for (int i = 0; i < 6; i++)
+            switch (i) {
+                case 0:
+                    System.out.println("i равно нулю.");
+                    break;
+                case 1:
+                    System.out.println("i равно единице.");
+                    break;
+                case 2:
+                    System.out.println("i равно двум.");
+                    break;
+                case 3:
+                    System.out.println("i равно трем.");
+                    break;
+                default:
+                    System.out.println("i больше трех.");
+            }
+    }
+}
+        /*  i равно нулю.
+            i равно единице.
+            i равно двум.
+            i равно трем.
+            i больше трех.
+            i больше трех. */
+
+
+    //Пример оператора switch
+class test {
+    public static void main(String[] args) {
+        for (int i = 0 ; i < 12 ; i++ )
+            switch (i) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4 :
+            System.out.println ( " i меньше 5") ;
+            break;
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+            System.out.println ( " i меньше 10") ;
+            break;
+        default :
+            System.out.println ( " i равно или больше 10") ;
+            }
+    }
+}
+        /*   i меньше 5
+             i меньше 5
+             i меньше 5
+             i меньше 5
+             i меньше 5
+             i меньше 10
+             i меньше 10
+             i меньше 10
+             i меньше 10
+             i меньше 10
+             i равно или больше 10
+             i равно или больше 10 */
+
+
+    //Аналог примера выше
+class test {
+    public static void main(String[] args) {
+        int month = 4 ;
+        String season;
+        switch ( month ) {
+            case 12:
+            case 1:
+            case 2:
+                season = "Зиме";
+                break;
+            case 3:
+            case 4:
+            case 5:
+                season = "Весне";
+                break;
+            case 6:
+            case 7:
+            case 8:
+                season = "Лете";
+                break;
+            case 9:
+            case 10:
+            case 11:
+                season = "Осени";
+                break;
+            default:
+                season = "Другим месяцам";
+                break;
+        }
+
+        System.out.println("Aпpeль относится к " + season + "." ) ;
+            }
+    }
+
+        /*   Aпpeль относится к Весне. */
+
+
+class test {
+    public static void main(String[] args) {
+                String str = "два";    //String значание
+                switch (str) {
+                    case "один":
+                        System.out.println("oдин");
+                        break;
+                    case "два":
+                        System.out.println("двa");
+                        break;
+                    case "три":
+                        System.out.println("тpи");
+                        break;
+                    default:
+                    System.out.println(" нe совпало ) ");
+                    break;
+                }
+            }
+        }
+
+        /*   Вывод:   двa      */
+
+
+      //Пример while
+class test {
+    public static void main(String[] args) {
+        int n = 10;
+        while (n > 0) {
+            System . out . println ("тaкт " + n ) ;
+            n--;
+                }
+            }
+        }
+
+        /*   тaкт 10
+             тaкт 9
+             тaкт 8
+             тaкт 7
+             тaкт 6
+             тaкт 5
+             тaкт 4
+             тaкт 3
+             тaкт 2
+             тaкт 1   */
+
+      //Пример с while
+class test {
+    public static void main(String[] args) {
+        int i, j;
+        i = 100;
+        j = 200;
+        //рассчитать среднее значение переменных i и j
+        while ( ++i < --j ) ;           //у этого цикла отсутствует тело
+
+        System.out . println ( " Cpeднee значение равно " + i ) ;
+                }
+            }
+
+        /*   Cpeднee значение равно 150   */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
