@@ -1,0 +1,207 @@
+                                                                            //Chapter 06
+
+
+    //Упрощенная общая форма определения класса имеет следующий вид:
+
+class имя_класса {
+    тип переменная_экземпляра1;
+    тип переменная_экземпляра1;
+// ...
+    тип переменная_экземпляраn;
+    тип имя_метода1(список_параметров) {
+      //тело метода
+}
+
+   тип имя_метода2(список_параметров) {
+      //тело метода
+}
+//...
+   тип имя_методаN(список_параметров) {
+    //тело метода
+    }
+}
+
+//Чтобы действительно создать объект класса Вох, нужно воспользоваться оператором наподобие следующего:    Вох mybox = new Вох() ; / / создать объект mybox класса Вох
+
+      //Пример прогрмаммы с классом box
+class Box {
+    double width;
+    double height ;
+    double depth;
+    // В этом классе объявляется объект тиnа Вох
+    class BoxDemo {
+        public static void main (String args[] ) {
+            Box mybox = new Box() ;
+            double vol ;
+                        // присвоить значение переменным экземпляра шуЬох
+            mybox.width = 10;
+            mybox.height = 20;
+            mybox.depth = 15;
+                        // рассчитать объем параллелепипеда
+            vol = mybox.width * mybox.height * mybox.depth;
+            System.out.println("Oбъeм равен " + vol) ;
+        }
+    }
+}
+    /*  Вывод:     Объем равен 3000 .О      */
+
+
+
+      //Пример создвния двух обьектов класса
+class Box {
+    double width;
+    double height;
+    double depth;
+
+    // В этом классе объявляется объект тиnа Вох
+    class Boxdemo {
+        public static void main(String args[]) {
+            {
+                Box mybox1 = new Box();
+                Box mybox2 = new Box();
+                double vol;
+                // присвоить значения переменным э кземпляра myЬoxl
+                mybox1.width = 10;
+                mybox1.height = 20;
+                mybox1.depth = 15;
+                // присвоить другие значения переменны эpкземпляра mybox1
+                mybox2.width = 3;
+                mybox2.height = 6;
+                mybox2.depth = 9;
+                // рассчитать объем первого параллелепипеда
+                vol = mybox1.width * mybox1.height * mybox1.depth;
+                System.out.println("Oбъeм равен " + vol);
+// рассчитать объем второго параллелепипеда
+                vol = mybox2.width * mybox2.height * mybox2.depth;
+                System.out.println(" Oбъeм равен " + vol);
+            }
+        }
+    }
+}
+/*  Вывод:    Объем равен 3000 .0
+              Объем равен 1 62.О   */
+
+
+
+    //Пример метода в классе box
+class Box {
+    double width;
+    double height;
+    double depth;
+
+    //Рассчитать обьем
+    void volume() {
+        System.out.print("Oбъeм равен ");
+        System.out.println(width * height * depth);
+    }
+}
+class BoxDemo {
+    public static void main(String[] args) {
+        Box mybox1 = new Box();
+        Box mybox2 = new Box();
+        //присвоить значение переменным экземпляра JIYЬoxl
+        mybox1.width = 10;
+        mybox1.height = 20;
+        mybox1.depth = 15;
+/* присвоить другие значения переменным экземпляра .iytюx2
+экземпляра mybox2 */
+        mybox2.width = 3;
+        mybox2.height = 6;
+        mybox2.depth = 9;
+        //вывести объем первого параллелепипеда
+        mybox1.volume();
+        //вывести объем второго параллелепипеда
+        mybox2.volume();
+    }
+}
+/*   Вывод: Oбъeм равен 3000.0
+            Oбъeм равен 162.0     */
+
+
+    //Аналог кода выше с return
+class Box {
+    double width;
+    double height;
+    double depth;
+
+    //Рассчитать обьем
+    double volume() {      //добавили return
+        return width * height * depth;
+    }
+}
+class BoxDemo {
+    public static void main(String[] args) {
+        Box mybox1 = new Box();
+        Box mybox2 = new Box();
+        //присвоить значение переменным экземпляра JIYЬoxl
+        mybox1.width = 10;
+        mybox1.height = 20;
+        mybox1.depth = 15;
+/* присвоить другие значения переменным экземпляра .iytюx2
+экземпляра mybox2 */
+        mybox2.width = 3;
+        mybox2.height = 6;
+        mybox2.depth = 9;
+        //вывести объем первого параллелепипеда
+        double vol1 = mybox1.volume();        //изменили вызов обьекта, либо System.out.println("Oбъeм равен" + myboxl.volume());
+        System.out.println(vol1);
+        //вывести объем второго параллелепипеда
+        double vol2 = mybox2.volume();        //изменили вызов обьекта, либо System.out.println("Oбъeм равен" + mybox2.volume());
+        System.out.println(vol2);
+    }
+}
+/*   Вывод: Oбъeм равен 3000.0
+            Oбъeм равен 162.0     */
+
+/*  -Тип данных, возвращаемых методом, должен быть совместим с возвращаемым типом, указанным в методе. Так, если какой-нибудь метод должен возвращать логический тип boolean, то возвратить из него целочисленное
+зна-чение нельзя.
+-   Переменная, принимающая возвращаемое методом значение (например, vol ) , также должна быть совместима с возвращаемым типом, указанным для метода.  167 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
