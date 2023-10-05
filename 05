@@ -312,6 +312,342 @@ class test {
                         b =3      */
 
 
+        //Пример цикла for без некоторых частей 
+class test {
+    public static void main(String[] args)  {
+        int i;
+        boolean done = false;
+        i = 0;
+        for ( ; ! done; ) {         //Инициализация и итерация вынесены за паределы цикла
+            System.out.println ( " i равно " + i ) ;
+            if ( i == 10) done = true ;
+            i++ ;
+        }
+    }
+}
+
+
+        /*   Вывод:      i равно 0
+                         i равно 1
+                         i равно 2
+                         i равно 3
+                         i равно 4
+                         i равно 5
+                         i равно 6
+                         i равно 7
+                         i равно 8
+                         i равно 9
+                         i равно 10     */
+
+
+
+//for (тип итерационная_пвременная : жоллвжц�wя) блож _ опвраторов, где тип обозначает конкретный тип данных; итерационная_ переменная - имя итерациоиной переменной, которая последовательно принимает значения 
+из коллекции: от первого и до последнего: а коллекция - перебираемую в цикле коллекцию.
+
+    //Пример for each
+class test {
+    public static void main(String[] args)  {
+        int nums [] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 , 10 };
+        int sum = 0;
+        //использовать цил в стиле for each для вывода и суммирования значений
+        for ( int х : nums ) {
+            System.out.println(" Знaчeниe равно : " + х);
+            sum += х;
+        }
+            System.out.println("Cyммa равна : " + sum);
+        }
+    }
+        /*   Вывод:      Знaчeниe равно : 1
+                         Знaчeниe равно : 2
+                         Знaчeниe равно : 3
+                         Знaчeниe равно : 4
+                         Знaчeниe равно : 5
+                         Знaчeниe равно : 6
+                         Знaчeниe равно : 7
+                         Знaчeниe равно : 8
+                         Знaчeниe равно : 9
+                         Знaчeниe равно : 10
+                         Cyммa равна : 55     */
+
+
+    //Пример for each c break
+class test {
+    public static void main(String[] args) {
+        int sum = 0;
+        int nums[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        //использовать цикл for в стиле for each дл вывода и суммирования значений из части массива
+        for (int x : nums) {
+            System.out.println(" Знaчeниe равно : " + x);
+            sum += x;
+            if (x == 5) break; // прервать цикл после получения 5 значений
+        }
+            System.out.println("Cyммa пяти первых элементов равна : " + sum);
+/*   Вывод:      Знaчeниe равно : 1
+                         Знaчeниe равно : 2
+                         Знaчeниe равно : 3
+                         Знaчeниe равно : 4
+                         Знaчeниe равно : 5
+                         Cyммa пяти первых элементов равна : 15     */
+
+
+    //Пример переменной цикла for each что она доступна только для чтения
+class test {
+    public static void main(String[] args) {
+                int nums [] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+                for (int x : nums ) {
+                    System.out.print(x + " ");
+                    x = x * 10; //этот оператор не оказывает никакого влияния на массив nums
+                }
+                    System.out.println();
+
+                    for (int x : nums )
+                        System.out.print(x + " " ) ;
+                         System.out.println();
+        }
+    }
+        /*   Вывод:      1 2 3 4 5 6 7 8 9 10 
+                         1 2 3 4 5 6 7 8 9 10      */
+
+
+        !!!//Поример for each с многормерным массивом
+class test {
+    public static void main(String[] args) {
+        int sum = 0;
+        int nums [][] = new int [3][5] ;
+        //присвоить значение элементам массива DUlllS
+        for (int i = 0; i < 3; i++ )
+            for (int j = 0; j < 5; j ++)
+                nums[i][j] = (i + 1) * (j + 1);
+        //исполь зовать цикл for в стиле for each для   вывода и суммирования значений
+        for (int х[] : nums ) {
+            for (int у : х) {
+                System.out.println("Знaчeниe равно : " + у);
+                sum += у;
+            }
+        }
+                System.out.println("Cyммa : " + sum) ;
+        }
+    }
+        /*   Вывод:         Знaчeниe равно : 1
+                            Знaчeниe равно : 2
+                            Знaчeниe равно : 3
+                            Знaчeниe равно : 4
+                            Знaчeниe равно : 5
+                            Знaчeниe равно : 2
+                            Знaчeниe равно : 4
+                            Знaчeниe равно : 6
+                            Знaчeниe равно : 8
+                            Знaчeниe равно : 10
+                            Знaчeниe равно : 3
+                            Знaчeниe равно : 6
+                            Знaчeниe равно : 9
+                            Знaчeниe равно : 12
+                            Знaчeниe равно : 15
+                            Cyммa : 90     */
+
+
+        //Пример for each в неупорядоченном массиве
+class test {
+    public static void main(String[] args) {
+        int nums [] = { 6, 8, 3, 7, 5, 6, 1, 4};
+        int val = 5;
+        boolean found = false;
+        //использовать цикл for в стиле for each для поиска значения переменной val в массиве nums
+        for ( int x : nums ) {
+            if (x == val) {
+                found = true;
+                break;
+            }
+        }
+                if (found )
+                        System.out.println("Знaчeниe найдено!" );
+            }
+        }
+
+        /*   Вывод:    Знaчeниe найдено!     */
+
+
+        //Пример вложенного цикла
+class test {
+    public static void main(String[] args) {
+        int i, j;
+        for (i = 0; i < 10; i++) {
+            for (j = i; j < 10; j++)
+                System.out.print("0");
+            System.out.println("");
+        }
+    }
+}
+
+        /*  Вывод:      0000000000
+                        000000000
+                        00000000
+                        0000000
+                        000000
+                        00000
+                        0000
+                        000
+                        00
+                        0    */
+
+
+
+      //Пример break в цикле
+class test {
+    public static void main(String[] args) {
+        for ( int i = 2; i < 100; i++ ) {
+            if (i == 10) break; // выход из цикла, если значение переменной i равно 10
+            System.out.println("i: " + i);
+        }
+            System.out.println("Цикл завершен.") ;
+        }
+    }
+
+
+        /*      i: 2
+                i: 3
+                i: 4
+                i: 5
+                i: 6
+                i: 7
+                i: 8
+                i: 9
+                Цикл завершен.     */
+
+        //Пример break с вложенными циклами
+class test {
+    public static void main(String[] args) {
+        for ( int i=0 ; i<3; i++ ) {
+            System.out.print(" Пpoxoд " + i + " : ");
+            for (int j = 0; j < 100; j++) {
+                if (j == 10) break;      // выход из цикла , значение переменной j равно 10
+
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
+            System.out.println ("Циклы завершены.") ;
+        }
+    }
+
+
+        /*   Вывод   Пpoxoд 0 : 0 1 2 3 4 5 6 7 8 9 
+                     Пpoxoд 1 : 0 1 2 3 4 5 6 7 8 9 
+                     Пpoxoд 2 : 0 1 2 3 4 5 6 7 8 9 
+                     Циклы завершены.   */
+
+
+
+//break мметка ;
+Чаще всего метка - это имя метки, обозначающее блок кода. Им может бытькак самостоятельный блок кода, так и целевой блок другого оператора.
+
+    //Пример break vtnrb
+class test {
+    public static void main(String[] args) {
+        boolean t = true;
+        first:
+        {
+            second:
+            {
+                third:
+                {
+                    System.out.println("Пpeдшecтвyeт оператору break . ");
+                    if (t) break second; // выход из блока second
+                    System.out.println(" Этoт оператор не будет выполняться");
+                }
+                System.out.println("Этoт оператор не будет выполняться ");
+            }
+                    System.out.println(" Этoт оператор следует за блоком second . ");
+                }
+            }
+        }
+
+        /*   Вывод   Пpeдшecтвyeт оператору break . 
+             Этoт оператор следует за блоком second .    */
+
+
+      //Одним из наиболее распространенных применений оператора break с меткой служит выход из вложенных циклов. Так, в следующем примере программы внешний цикл выполняется только один раз:
+class test {
+    public static void main(String[] args) {
+        outer : for ( int i=0 ; i<3 ; i++) {
+            System.out.print ( "Пpoxoд " + i + ": " ) ;
+            for (int j=0; j < 100; j ++) {
+                if (j == 10) break outer;      // выход из обоих циклов
+                System.out.print (j + " " ) ;
+            }
+                System.out.println ("Этa строка не будет выводиться " ) ;
+        }
+                System.out.println ("Циклы завершены." ) ;
+                }
+            }
+
+
+        /*   Пpoxoд 0: 0 1 2 3 4 5 6 7 8 9 Циклы завершены.    */
+
+
+    //В данном примере кода оператор % служит для проверки четности значения переменной i. Если это четное значение, то выполнение цикла продолжается без перехода к новой строке. Эта программа выводит следующий
+//результат:
+class test {
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            System.out.print(i + " ");
+            if (i % 2 == 0) continue;   //Не перехоит на новую стороку
+            System.out.println(" ");
+        }
+    }
+}
+
+
+        /*  Вывод:      0 1  
+                        2 3  
+                        4 5  
+                        6 7  
+                        8 9      */
+
+
+   !!! // В данном примере оператор cont inue прерывает цикл подсчета значений переменной j и продолжает его со следующего шага цикла, в котором подсчитываются значения переменной i.
+class test {
+    public static void main(String[] args) {
+        outer : for ( int i = 0 ; i < 10; i++ ) {
+            for ( int j = 0; j < 10; j ++) {
+                if (j > i) {
+                    System.out.println();
+                    continue outer;
+                }
+                    System.out.print (" "+ (i * j ) );
+                }
+                System.out.println ();
+        }
+    }
+}
+
+        /*  Вывод:       0
+                         0 1
+                         0 2 4
+                         0 3 6 9
+                         0 4 8 12 16
+                         0 5 10 15 20 25
+                         0 6 12 18 24 30 36
+                         0 7 14 21 28 35 42 49
+                         0 8 16 24 32 40 48 56 64
+                         0 9 18 27 36 45 54 63 72 81      */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
