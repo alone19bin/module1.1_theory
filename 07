@@ -1,0 +1,390 @@
+                                                                                  //Chapter07\
+
+
+        //Пример перегрузки метода
+class OverloadDemo {
+    void test() {
+        System.out.println("Пapaмeтpы отсутствуют");
+    }
+
+    //Пере гружаемый метод , проверяющий наличие одного целочисленного параме тра
+    void test(int а) {
+        System.out.println("a: " + а);
+    }
+
+    //Пере гружаемый метод, проверяющий наличие двух целочисленных параметров
+    void test(int а, int Ь) {
+        System.out.println("a и Ь: " + а + " " + Ь);
+    }
+
+    //Перегружаемый метод , проверяющий наличие параметра типа double
+    double test(double a) {
+        System.out.println("double а: " + a);
+        return a * a;
+    }
+}
+
+    class Overload {
+        public static void main(String args[]) {
+            OverloadDemo ob = new OverloadDemo();
+            double result;
+            //вызвать все варианты метода teвt ()
+            ob.test();
+            ob.test(10);
+            ob.test(10, 20);
+            result = ob.test(123.25);
+            System.out.println("Peзyльтaт вызова ob.test (123.25): " + result);
+        }
+    }
+/*    Вывод:    Пapaмeтpы отсутствуют
+                a: 10
+                a и Ь: 10 20
+                double а: 123.25
+                Peзyльтaт вызова ob.test (123.25): 15190.5625         */
+
+
+
+      //Аналог кода выше с автоматическим преобразоавнием типов
+class OverloadDemo {
+    void test() {
+        System.out.println("Пapaмeтpы отсутствуют");
+    }
+
+    //Пере гружаемый метод, проверяющий наличие двух целочисленных параметров
+    void test(int а, int Ь) {
+        System.out.println("a и Ь: " + а + " " + Ь);
+    }
+
+    //Перегружаемый метод , проверяющий наличие параметра типа double
+    void test(double a) {
+        System.out.println("Внутреннее преобразование при вызове test(double) а: " + a);
+
+    }
+}
+
+    class Overload {
+        public static void main(String args[]) {
+            OverloadDemo ob = new OverloadDemo();
+            int i = 88;
+            ob.test();
+            ob.test(10, 20);
+            ob.test(i);
+            ob.test(123.2);
+        }
+    }
+/*    Вывод:    Пapaмeтpы отсутствуют
+                a и Ь: 10 20
+                Внутреннее преобразование при вызове test(double) а: 88.0
+                Внутреннее преобразование при вызове test(double) а: 123.2         
+
+в данной версии класса Over loadDemo перегружаемый вариант метода test ( int ) не определяется. Поэтому при вызове метода test () с целочисленным аргументом в классе Overload отсутствует соответствующий метод.
+Но в Java может быть автоматически выполнено преобразование типа integer в тип double, чтобы разрешить вызов нужного варианта данного метода. Так, если вариант метода test ( int ) не обнаружен,
+тип переменной i автоматически продвигается вJava к типу dоuЫе , а затем выЗЬ1вается вариант метода test ( douЬle ) . Безусловно, если бы вариант метода test ( int ) был определен, то был бы вызван
+именно он. Автоматическое преобразование типов в Java выполняется тольков том случае, если не обнаружено полное соответствие. */
+
+
+      //Пример реализации конструкторов 
+class OverloadDemo {
+    double width;
+    double height;
+    double depth;
+
+    //конструктор , исполь зуемый при указании всех размеров
+    OverloadDemo(double w, double h, double d) {
+        width = w;
+        height = h;
+        depth = d;
+    }
+
+    //конструктор, используемый , когда ни один из размеров не указан
+    OverloadDemo() {
+        width = -1;   //использовать значение - 1 для обозначения неинициализированного
+        //параллелепипеда
+
+        height = -1;
+        depth = -1;
+    }
+
+    // конструктор , исполь зуемый при создании куба
+    OverloadDemo(double len) {
+        width = height = depth = len;
+    }
+        //рассчитать и возвратить объем
+        double volume () {
+            return width * height * depth;
+        }
+    }
+
+    class OverloadCons {
+        public static void main(String args[]) {
+            // создать параллелепипеды, исполь зуя разные конструкторы
+            OverloadDemo mybox1 = new OverloadDemo(10, 20, 15);
+            OverloadDemo mybox2 = new OverloadDemo();
+            OverloadDemo mybox3 = new OverloadDemo(7);
+            double vol;
+            // получить объем первого параллелепипеда
+            vol = mybox1.volume();
+            System.out.println("Oбъeм myboxl равен " + vol);
+            //получить объем второго параллелепипеда
+            vol = mybox2.volume();
+            System.out.println(" Oбъeм mybox2 равен " + vol);
+            //получить объем куба
+            vol = mybox3.volume();
+            System.out.println(" Oбъeм mycube равен " + vol);
+        }
+    }
+
+/*    Вывод:     Oбъeм myboxl равен 3000.0
+                 Oбъeм mybox2 равен -1.0
+                 Oбъeм mycube равен 343.0       */
+
+
+
+        !!!//Прмиер передачи обекта методу в каччевте параметра 
+class test {
+    int a, b;
+    test(int i, int j) {
+        a = i;
+        b = j;
+    }
+        //возвратить логическое значение true, если в качестве параметра о указан вызывающий объект
+        boolean equals (test o) {
+        if (o.a == a && o.b == b) return true ;
+        else return false;
+        }
+    }
+
+    class OverloadCons {
+        public static void main(String args[]) {
+            test t1 = new test (100, 22);
+            test t2 = new test (100, 22) ;
+            test t3 = new test (-1, -1) ;
+            System.out.println("t1 t2 : "+ t1.equals(t2) );
+            System.out.println("t1 == t3 : " + t1.equals(t3) );
+        }
+    }
+
+/*    Вывод:    t1 t2 : true
+                t1 == t3 : false    
+Метод equals () проверяет в классе Test на равенство два объекта и возвращает получаемый результат. Таким образом, он сравнивает вызывающий объект с тем, который бьm ему передан. Если оба объекта содержат 
+одинаковые значения, метод equals ( ) возвращает логическое значение true, а иначе - логическое значение false.*/
+
+
+        //Пример класса Box один обьект допускается инициализировать другим обьектом
+class Box {
+  double width;
+  double height;
+  double depth;
+
+  //В этом конструкторе, в качестве параметра в нем используется объект типа Вох
+  Box(Box ob) { //передать объект конструктору
+    width = ob.width;
+    height = ob.height;
+    depth = ob.depth;
+  }
+
+  // конструктор , используемый при указании всех размеров
+  Box(double w, double h, double d) {
+    width = w;
+    height = h;
+    depth = d;
+  }
+
+  // конструктор , исполь зуемый, если ни один из размеров не указан
+  Box() {
+    width = -1;  // use -1 to indicate
+    height = -1; // an uninitialized
+    depth = -1;  // box
+  }
+
+  // конструктор , используемый, если ни один из размеров не указан
+  Box(double len) {
+    width = height = depth = len;
+  }
+
+  // рассчитать и возвратить объем
+  double volume() {
+    return width * height * depth;
+  }
+}
+  
+class OverloadCons2 {
+  public static void main(String args[]) {
+    // создать параллелепипеды, исползуя разные конструкторы
+    Box mybox1 = new Box(10, 20, 15);
+    Box mybox2 = new Box();
+    Box mycube = new Box(7);
+
+      //создать копию объекта JDYЬoxl
+    Box myclone = new Box(mybox1);
+    double vol;
+
+    // получить объем первого параллелепипеда
+    vol = mybox1.volume();
+    System.out.println("Volume of mybox1 is " + vol);
+
+    // получить объем второго параллелепипеда
+    vol = mybox2.volume();
+    System.out.println("Volume of mybox2 is " + vol);
+
+    // получить объем куба
+    vol = mycube.volume();
+    System.out.println("Volume of cube is " + vol);
+
+    // получить объем клона
+    vol = myclone.volume();
+    System.out.println("Volume of clone is " + vol);
+  }
+}
+
+
+!!!/* Для передачи аргументов подпрограмме в языках программирования имеются два способа. Первым способом является вызов по значению. В этомслучае зна-ченш аргумента копируется в формальный параметр подпрограммы.
+Следовательно, изменения, вносимые в параметр подпрограммы, не оказывают никакого влияния на аргумент. Вторым способом передачи аргумента являетсявызоов по ссылке. В этом случае параметру передается ссылка 
+на аргумент, а не его значение. В теле подпрограммы эта ссьшка служит для обращения к конкретному аргументу, указанному в вызове. Это означает, что изменения, вносимые в параметр подпрограммы, будут оказывать
+влияние на аргумент, используемый при ее вызове. Как будет показано далее, все аргументы в Java передаются при вызове по значению, но конкретный результат зависит от того, какой именно тип данных
+передается: примитивный или ссылочный.
+Когда методу передается аргумент примитивного типа, его передача происходит по значению. В итоге создается копия аргумента, и все, что происходит с параметром, принимающим этот аргумент, не оказывает 
+никакого влияния за пределами вызываемого метода.    */
+
+      !!!//Аргументы примитивных типов передаются по значению
+class Test {
+  void meth(int i, int j) {
+    i *= 2;
+    j /= 2;
+  }
+}
+
+class CallByValue {
+  public static void main(String args[]) {
+    Test ob = new Test();
+    int a = 15, b = 20;
+    
+    System.out.println("a and b до вызова: " +
+                       a + " " + b);
+
+    ob.meth(a, b); 
+
+    System.out.println("a and b после вызова: " +
+                       a + " " + b);
+  }
+}
+/*    Вывод:    а и Ь до вызова : 15 20
+                а и Ь после вызова: 15 20    */
+
+
+      !!!// Пример объектов которые передаются по ссылке на них
+class Test {
+  int a, b;
+
+  Test(int i, int j) {
+    a = i;
+    b = j;
+  }
+
+  // передать объе кт
+  void meth(Test o) {
+    o.a *=  2;
+    o.b /= 2;
+  }
+}
+
+class PassObjRef {
+  public static void main(String args[]) {
+    Test ob = new Test(15, 20);
+    
+    System.out.println("ob.a and ob.b до вызова: " +
+                       ob.a + " " + ob.b);
+
+    ob.meth(ob); 
+
+    System.out.println("ob.a and ob.b после вызова: " +
+                       ob.a + " " + ob.b);
+  }
+}
+/*    Вывод:    оЬ .а и оЬ .Ь до вызова : 15 20
+                оЬ .а и оЬ .Ь после вызова : 30 10   
+Когда методу передается ссылка на объект, сама ссылка передается способом вызова по значению. Но поскольку передаваемое значение ссылается на объект, то копия этого значения все равно будет ссылаться на
+тот же самый объект, что и соответствующий аргумент.*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
