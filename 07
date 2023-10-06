@@ -450,14 +450,50 @@ class AccessTest {
 
 
 
+        //Пример статических переменных
+class UseStatic {
+  static int a = 3;
+  static int b;
+
+  static void meth(int x) {
+    System.out.println("x = " + x);
+    System.out.println("a = " + a);
+    System.out.println("b = " + b);
+  }
+
+  static {
+    System.out.println(""Cтaтичecкий блок инициализирован.");
+    b = a * 4;
+  }
+
+  public static void main(String args[]) {
+    meth(42);
+  }
+}
+/*    Вывод:    х = 42
+                а = З
+                b = 12     */
 
 
+      //Пример статических переменных
+class StaticDemo {
+  static int a = 42;
+  static int b = 99;
+  static void callme() {
+    System.out.println("a = " + a);
+  }
+}
 
+class StaticByName {
+  public static void main(String args[]) {
+    StaticDemo.callme();
+    System.out.println("b = " + StaticDemo.b);
+  }
+}
+/*    Вывод:     а 42
+                 b = 99    */
 
-
-
-
-
+194
 
 
 
