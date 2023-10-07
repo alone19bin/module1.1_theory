@@ -670,7 +670,7 @@ class Figure {
   }
 
   double area() {
-    System.out.println("Area for Figure is undefined.");
+    System.out.println(""Плoщaдь фигуры не определена.");
     return 0;
   }
 }
@@ -680,9 +680,9 @@ class Rectangle extends Figure {
     super(a, b);
   }
 
-  // override area for rectangle
+  // переопределить метод area () для четырехугольника
   double area() {
-    System.out.println("Inside Area for Rectangle.");
+    System.out.println("B области четырехугольника .");
     return dim1 * dim2;
   }
 }
@@ -692,9 +692,9 @@ class Triangle extends Figure {
     super(a, b);
   }
 
-  // override area for right triangle
+  // oпереопределить метод area () для прямоугольного треугольника
   double area() {
-    System.out.println("Inside Area for Triangle.");
+    System.out.println("B области треугольника .");
     return dim1 * dim2 / 2;
   }
 }
@@ -708,26 +708,127 @@ class FindAreas {
     Figure figref;
 
     figref = r;
-    System.out.println("Area is " + figref.area());
+    System.out.println("Плoщaдь равна" + figref.area());
     
     figref = t;
-    System.out.println("Area is " + figref.area());
+    System.out.println("Плoщaдь равна" + figref.area());
     
     figref = f;
-    System.out.println("Area is " + figref.area());
+    System.out.println("Плoщaдь равна" + figref.area());
+  }
+}
+/* Вывод:       В области четырехугольника .
+                Площадь равна 45
+                В области треугольника .
+                Площадь равна 40
+                Область фигуры не определена .
+                Площадь равна О       */
+
+
+            //Пример абстрактного класса
+abstract class A {
+  abstract void callme();
+
+  // абстрактные классы все же могут содержать конкре тные методы
+  void callmetoo() {
+    System.out.println("Этo конкретный метод");
   }
 }
 
+class B extends A {
+  void callme() {
+    System.out.println("eaлизaция метода callme () из класса В .");
+  }
+}
+
+class AbstractDemo {
+  public static void main(String args[]) {
+    B b = new B();
+
+    b.callme();
+    b.callmetoo();
+  }
+}
+//получить экземпляр абстрактного класса нельзя. И еще одно: в классе А реализуется конкретный метод callmetoo ( ) , что вполнедопустимо. В абстрактные классы может быть включена реализация какого угодно
+//количества конкретных методов.
+
+
+          //Пример применения абстрактных методов и классов
+abstract class Figure {
+  double dim1;
+  double dim2; 
+
+  Figure(double a, double b) {
+    dim1 = a;
+    dim2 = b;
+  }
+
+  // теперь метод area () объявляется абстрактныы
+  abstract double area();
+}
+
+class Rectangle extends Figure {
+  Rectangle(double a, double b) {
+    super(a, b);
+  }
+
+  //переопределить метод area () для четырехугольника
+  double area() {
+    System.out.println("B области четырехугольника.");
+    return dim1 * dim2;
+  }
+}
+
+class Triangle extends Figure {
+  Triangle(double a, double b) {
+    super(a, b);
+  }
+
+  // переопределить метод area () для прямоугольного треугольника
+  double area() {
+    System.out.println("B области треугольника.");
+    return dim1 * dim2 / 2;
+  }
+}
+
+class AbstractAreas {
+  public static void main(String args[]) {
+  // Figure f = new Figure(10, 10); // теперь недопустимо
+    Rectangle r = new Rectangle(9, 5);
+    Triangle t = new Triangle(10, 8);
+    
+    Figure figref; // верно , но объект не создается
+
+    figref = r;
+    System.out.println("Плoщaдь равна" + figref.area());
+    
+    figref = t;
+    System.out.println("Плoщaдь равна" + figref.area());
+  }
+}
+/*  Если создать объект типа Figure нельзя, то можно хотя бы создать ссьuючную переменную типа Figure. Переменная figref объявлена как ссьтка на класс Figure, т.е. ее можно использовать для ссьтки на 
+объект любого класса, производного от класса Figure. Как пояснялось ранее, вызовы переопределенных методов разрешаются во время выполнения с помощью ссьточных переменных из суперкласса.  
 
 
 
 
+!!!Нередко при вызове небольшого завершенного метода компилятор Java может встраивать байт-код для подпрограммы непосредственно в скомпилированный код вызывающего метода, тем самым снижая издержки на вызов метода. 
+Такая возможность встраивания вызовов присуща только завершенным методам. Как правило, вызовы методов разрешаются в Java динамически во время выполнения. Такой способ называется поздним связыванием.
+Но поскольку завершенные методы нt могут быть переопределены, их вызовы могут быть разрешены во время компиляции. И такой способ называется ранним связыванием.*/
 
 
-
-
-
-
+OЬject clone ()                                         Создает новый объект, не отличающийся от клонируемого
+Ьoolean equals (OЬject oЬject)                          Определяет, равен ли один объект другому     Метод equals () сравнивает два объекта. Если объекты равны, он возвращает логическое значение true
+void finalize О                                         Вызывается перед удалением неиспользуемого объекта
+Class<?> qetClass ()                                    Получает класс объекта во время выполнения
+int hashCode ()                                         Возвращает хеш-код, связанный с вызывающим объектом
+void notify ()                                          Возобновляет исполнение потока, ожидающего вызывающего объекта
+void notifyAll ()                                       Возобновляет исполнение всех потоков, ожидающих вызывающего объекта
+Strinq toStrinq ()                                      Возвращает символьную строку, описывающую объект
+void wait()                                             Ожидает другого потока исполнения
+void wait (lonq миллисекунд)
+void wait (lonq миллисекунд,
+int наносекунд)
 
 
 
