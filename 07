@@ -493,18 +493,106 @@ class StaticByName {
 /*    Вывод:     а 42
                  b = 99    */
 
-194
 
 
 
+          //Прмиер вложенного класса
+// Demonstrate an inner class.
+class Outer {
+  int outer_x = 100;
+
+  void test() {
+    Inner inner = new Inner();
+    inner.display();
+  }
+
+  // this is an innner class
+  class Inner {
+    void display() {
+      System.out.println("display: outer_x = " + outer_x);
+    }
+  }
+}
+class InnerClassDemo {
+  public static void main(String args[]) {
+    Outer outer = new Outer();
+    outer.test();
+  }
+}
+/*    Вывод:    outer_x = 100   
 
 
+В данной программе внутренний класс I nner определен в области действия класса Outer. Поэтому любой код из класса Inner может непосредственно обращаться к переменной outer_ х. Метод экземпляра display ()
+определен в классе Inner. Этот метод выводит значение переменной oute r_x в стандартный пото вывода. В методе main () из класса InnerClas s Demo создается экземпляр классаOuter и вызывается его метод test (). 
+А в этом методе создается экземпляр класса Inner и вызывается метод di splay (). ледует иметь в виду, что экземпляр класса Inner может быть создан только в контексте класса Outer. В противном случае компилятор
+Java выдаст сообщение об ошибке.
+Члены внутреннего класса доступны только в области действия внутреннего класса и не могут быть использованы внешним классом. Как показано в приведенном ниже примере программы, переменная уобъявлена как 
+переменная экземпляра класса Inner. Поэтому она недоступна за пределами этого класса и не может использоваться в методе showy () .*/
 
 
+            //Пример ошибки компиляции
+class Outer {
+  int outer_x = 100;
+
+  void test() {
+    Inner inner = new Inner();
+    inner.display();
+  }
+
+  // это внутренний класс
+  class Inner {
+    int y = 10; // у - локальная переменная класса Inner
+    void display() {
+      System.out.println("вывoд: outer_x = " + outer_x);
+    }
+  }
+
+  void showy() {
+    System.out.println(y); // ошибка , здесь переменная у недоступна !
+  }
+}
+
+class InnerClassDemo {
+  public static void main(String args[]) {
+    Outer outer = new Outer();
+    outer.test();
+  }
+}
 
 
+           //Пример внутреннего класса в цикле for
+class Outer {
+  int outer_x = 100;
 
+  void test() {
+    for(int i=0; i<10; i++) {
+      class Inner {
+        void display() {
+          System.out.println("вывoд: outer_x = " + outer_x);
+        }
+      }
+      Inner inner = new Inner();
+      inner.display();
+    }
+  }
+}
 
+class InnerClassDemo {
+  public static void main(String args[]) {
+    Outer outer = new Outer();
+    outer.test();
+  }
+}
+/*    Вывод:    вывод : outer х 100
+                вывод : outer х 100
+                вывод : outer х 100
+                вывод : outer х 100
+                вывод : outer х 100
+                вывод : outer х 100
+                вывод : outer x 100
+                вывод : outer х 100
+                вывод : outer x 100
+                вывод : out er х 100  */
 
 
 
