@@ -190,51 +190,533 @@ class RefDemo {
 //  System.out.println("Вес of plainbox равен " + plainbox.weight);
   }
 }
-/* В данном примере член we ightbox содержит ссьшку на объекты класса
-BoxWe ight, а член раinЬох-ссылкунаобъекты класса Вох. А посколъкуВохWе ight ­
-это подкласс, производный от класса Вох, то его члену painbox можно присвоить
-ссЬVIку на объект we igh tbox. */
+/* В данном примере член we ightbox содержит ссьшку на объекты класса BoxWeight, а член раinЬох- ссылку наобъекты класса Вох. А посколъку ВохWеight ­ это подкласс, производный от класса Вох, то его члену
+painbox можно присвоить ссылку на объект weightbox. */
+
+
+
+
+         !!! //Пример super()
+class Box {
+  private double width;
+  private double height;
+  private double depth;
+
+  // сконструировать клон объекта
+  Box(Box ob) { // pass object to constructor
+    width = ob.width;
+    height = ob.height;
+    depth = ob.depth;
+  }
+
+  // конструктор, применяемый при указании всех размеров
+  Box(double w, double h, double d) {
+    width = w;
+    height = h;
+    depth = d;
+  }
+
+  // конструктор,  применяемый в отсутствие размеров
+  Box() {
+    width = -1;  // use -1 to indicate
+    height = -1; // an uninitialized
+    depth = -1;  // box
+  }
+
+  // конструктор, применяемый при создании куба
+  Box(double len) {
+    width = height = depth = len;
+  }
+
+  // рассчитать и возвратить объем
+  double volume() {
+    return width * height * depth;
+  }
+}
+
+//Теперь в классе ВOxWeight полностью реализованы все конструкторы
+class BoxWeight extends Box {
+  double weight; // вес параллелепипеда
+
+  // сконструировать клон объекта
+  BoxWeight(BoxWeight ob) { // передать объект конструктору
+    super(ob);
+    weight = ob.weight;
+  }
+
+  // конструктор , применяемый при указании всех параметров
+  BoxWeight(double w, double h, double d, double m) {
+    super(w, h, d); // вызвать конструктор из суперкласса
+    weight = m;
+  }    
+
+  // конструктор, применяемый по умолчанию
+  BoxWeight() {
+    super();
+    weight = -1;
+  }
+
+  // конструктор , применяемый при создании куба
+  BoxWeight(double len, double m) {
+    super(len);
+    weight = m;
+  }
+}
+  
+class DemoSuper {
+  public static void main(String args[]) {
+    BoxWeight mybox1 = new BoxWeight(10, 20, 15, 34.3);
+    BoxWeight mybox2 = new BoxWeight(2, 3, 4, 0.076);
+    BoxWeight mybox3 = new BoxWeight(); // по умолчанию
+    BoxWeight mycube = new BoxWeight(3, 2);
+    BoxWeight myclone = new BoxWeight(mybox1);
+    double vol;
+
+    vol = mybox1.volume();
+    System.out.println("Обьем of mybox1 равен " + vol);
+    System.out.println("Вес of mybox1 равен " + mybox1.weight);
+    System.out.println();
+
+    vol = mybox2.volume();
+    System.out.println("Обьем of mybox2 равен " + vol);
+    System.out.println("Вес of mybox2 равен " + mybox2.weight);
+    System.out.println();
+
+    vol = mybox3.volume();
+    System.out.println("Обьем of mybox3 равен " + vol);
+    System.out.println("Вес of mybox3 равен " + mybox3.weight);
+    System.out.println();
+ 
+    vol = myclone.volume();
+    System.out.println("Обьем of myclone равен " + vol);
+    System.out.println("Вес of myclone равен " + myclone.weight);
+    System.out.println();
+
+    vol = mycube.volume();
+    System.out.println("Обьем of mycube равен " + vol);
+    System.out.println("Вес of mycube равен " + mycube.weight);
+    System.out.println();
+  }
+}
+/* Вывод:           Объем myboxl равен 3000 .О
+                    Вес myboxl равен 34.3
+                    Объем mybox2 равен 24.О
+                    Вес mybox2 равен 0.076
+                    Объем mybox3 равен -1.О
+                    Вес mybox3 равен -1.0
+                    Объем myclone равен 3000.0
+                    Вес myclone равен 34.3
+                    Объем mycube равен 27.0
+                    Вес mycube равен 2.0      
+
+//сконструировать клон объекта
+BoxWeight ( BoxWeight оЬ ) { / / передать объект конструктору
+super ( оЬ ) ;
+weight = ob . weight ;
+}*/
+
+
+          !!!//Прмиер использования ключевого слова super с целью предотвратить сокрытие имен
+class A {
+  int i;
+}
+
+// создать подкласс путем расширения класса А
+class B extends A {
+  int i; // этот член i скрывает член i из класса А
+
+  B(int a, int b) {
+    super.i = a; // член i из класса А
+    i = b; // член i из класса В
+  }
+
+  void show() {
+    System.out.println("Члeн i в суперклассе: " + super.i);
+    System.out.println("Члeн i в подклассе: " + i);
+  }
+}
+  
+class UseSuper {
+  public static void main(String args[]) {
+    B subOb = new B(1, 2);
+
+    subOb.show();
+  }
+}
+/* Вывод:           Член i в суперклассе : 1
+                    Член i в подклассе : 2     */
+
+
+
+            //Пример многоуровневой иерархии
+//создать сначала класс Вох
+class Box {
+  private double width;
+  private double height;
+  private double depth;
+
+  // сконструировать клон объекта
+  Box(Box ob) { // передать объект конструктору
+    width = ob.width;
+    height = ob.height;
+    depth = ob.depth;
+  }
+
+  // конструктор, применяемый при указании всех размеров
+  Box(double w, double h, double d) {
+    width = w;
+    height = h;
+    depth = d;
+  }
+
+  // конструктор, применяемый в отсутствие размеров
+  Box() {
+    width = -1;  //значение -1 служит для обозначения
+    height = -1; //неинициализированного
+    depth = -1;  //неинициализированного
+  }
+
+  // конструктор, применяемый при создании куба
+  Box(double len) {
+    width = height = depth = len;
+  }
+
+  // рассчитать и возвратить объем
+  double volume() {
+    return width * height * depth;
+  }
+}
+
+// добавить поле веса
+class BoxWeight extends Box {
+  double weight; // вес параллелепипеда
+
+  //сконструировать клон объекта
+  BoxWeight(BoxWeight ob) { //передать объе кт конструктору
+    super(ob);
+    weight = ob.weight;
+  }
+
+  //конструктор, применяемый при указании всех параметровпередать объе кт конструктору
+  BoxWeight(double w, double h, double d, double m) {
+    super(w, h, d); // вызвать конструктор суnеркласса
+    weight = m;
+  }    
+
+  // конструктор , применяемый по умолчанию
+  BoxWeight() {
+    super();
+    weight = -1;
+  }
+
+  // конструктор , применяемый при создании куба
+  BoxWeight(double len, double m) {
+    super(len);
+    weight = m;
+  }
+}
+
+// добавить поле стоимости доставки
+class Shipment extends BoxWeight {
+  double cost;
+
+  // сконструировать клон объекта
+  Shipment(Shipment ob) { // передать объект конструктору
+    super(ob);
+    cost = ob.cost;
+  }
+
+  // конструктор , используемый при указании всех параметров
+  Shipment(double w, double h, double d,
+            double m, double c) {
+    super(w, h, d, m); //вызвать конструктор суперкласса
+    cost = c;
+  }    
+
+  // конструктор, применяемый по умолчанию
+  Shipment() {
+    super();
+    cost = -1;
+  }
+
+  // конструктор , применяемый при создании куба
+  Shipment(double len, double m, double c) {
+    super(len, m);
+    cost = c;
+  }
+}
+  
+class DemoShipment {
+  public static void main(String args[]) {
+    Shipment shipment1 =  new Shipment(10, 20, 15, 10, 3.41);
+    Shipment shipment2 = new Shipment(2, 3, 4, 0.76, 1.28);
+
+    double vol;
+
+    vol = shipment1.volume();
+    System.out.println("Обьем of shipment1 равен " + vol);
+    System.out.println("Вес of shipment1 равен " + shipment1.weight);
+    System.out.println("Cтoимocть доставки: $" + shipment1.cost);
+    System.out.println();
+
+    vol = shipment2.volume();
+    System.out.println("Обьем of shipment2 равен " + vol);
+    System.out.println("Вес of shipment2 равен " + shipment2.weight);
+    System.out.println("Shipping cost: $" + shipment2.cost);
+  }
+}
+/* Вывод:         Объем shipmentl равен 3000.О
+                  Вес shipmentl равен 10 .0
+                  Стоимость доставки : $3.41
+                  Объем shipment2 равен 24.0
+                  Вес shipment2 равен 0.76
+                  Стоимость доставки : $1.28   */
+
+
+
+
+        //Пример порядка вызова конструкторов
+class A {
+  A() { 
+    System.out.println("Внутри конструкторе А.");
+  }
+}
+
+//создать подкласс путем расширения класса А
+class B extends A {
+  B() {
+    System.out.println("Внутри конструктора В.");
+  }
+}
+
+// создать еще один подкласс путем расширения класса В
+class C extends B {
+  C() {
+    System.out.println("Внутри конструктора С.");
+  }
+}
+  
+class CallingCons {
+  public static void main(String args[]) {
+    C c = new C();
+  }
+}
+/* Вывод:         Внутри конструктора А
+                  Внутри конструктора В
+                  Внутри конструктора С  */
+
+
+
+
+            //Пример переопределения метода
+class A {
+  int i, j;
+
+  A(int a, int b) {
+    i = a;
+    j = b;
+  }
+
+  // вывести содержимое переменных i и j
+  void show() {
+    System.out.println("i and j: " + i + " " + j);
+  }
+}
+
+class B extends A {
+  int k;
+
+  B(int a, int b, int c) {
+    super(a, b);
+    k = c;
+  }
+
+  // вывести содержимое переменной k с помощью метода, переопределяюще го ме тод show () из класса А
+  void show() {
+    System.out.println("k: " + k);
+  }
+}
+  
+class Override {
+  public static void main(String args[]) {
+    B subOb = new B(1, 2, 3);
+
+    subOb.show(); // / здесь вызывается метод show () из класса В
+  }
+}
+/* Вывод:         k: 3  */
+
+
+      //Аналоги кола выше с выводом i и j из под суперкласса
+class B extends A {
+  int k;
+
+  B(int a, int b, int c) {
+    super(a, b);
+    k = c;
+  }
+
+  void show() {
+    super.show(); // эдесь вызывается метод show () из класса А
+    System.out.println("k: " + k);
+  }
+}
+/* Вывод:       i и j : 1 2
+                k: з     */
+
+
+
+
+              !!!//Пример методов с отличающимися сигнатурами которые считаются, перегружаемыми, а не переопределяемыми
+class A {
+  int i, j;
+
+  A(int a, int b) {
+    i = a;
+    j = b;
+  }
+
+  // вывести содержимое переменных i и j
+  void show() {
+    System.out.println("i and j: " + i + " " + j);
+  }
+}
+
+// создать подкласс путем расширения класса А
+class B extends A {
+  int k;
+
+  B(int a, int b, int c) {
+    super(a, b);
+    k = c;
+  }
+
+  // перегрузить метод show ()
+  void show(String msg) {
+    System.out.println(msg + k);
+  }
+}
+  
+class Override {
+  public static void main(String args[]) {
+    B subOb = new B(1, 2, 3);
+
+    subOb.show("This is k: ");  // вызвать метод show () из класса В
+    subOb.show();               // вызвать метод show () из класса А
+  }
+}
+/* Вывод:        Это k: 3
+                 i и j: 1 2          */
 
 
 
 
 
+/*Переопределение методов служитдля одного из основой для одного из наиболее эффективных принципов в Java - динамической диспетчеризации методов. Динамическая диспетчеризация методов - это механизм, 
+с помощью которого вызов переопределенного метода разрешается во время выполнения, а не компиляции. Динамическая диспетчеризация методов важна потому, что благодаря ей полиморфизм вJava реализуется во
+время выполнения. */
+      //Пример динамической диспетчеризацим методов
+class A {
+   void callme() {
+     System.out.println("В методе callme() из класса А");
+  }
+}
+
+class B extends A {
+  // пере определить метод callme ()
+  void callme() {
+    System.out.println("В методе callme() из класса В");
+  }
+}
+
+class C extends A {
+  // переопределить метод callme ()
+  void callme() {
+    System.out.println("В методе callme() из класса C");
+  }
+}
+
+class Dispatch {
+  public static void main(String args[]) {
+    A a = new A(); // объект класса А
+    B b = new B(); // объект класса B
+    C c = new C(); // объект класса C
+    A r; //получить ссылку на объект типа А  
+
+    r = a; // переменная r ссылается на обьект типа А
+    r.callme(); // вызвать вариант ме тода callme (), определенный в классе А
+
+    r = b; // переменная r ссылается на обьект типа В
+    r.callme(); // вызвать вариант метода callme (), определенный в классе В
+
+    r = c; //  переменная r ссылается на обьект типа С
+    r.callme(); // вызвать вариант ме тода callme (), определенный в классе С
+  }
+}
+/* Вывод:       В ме тоде callme() из класса А
+                В ме тоде callme() из класса В
+                В методе callme() из класса С        */
 
 
 
+        //Пример применения полиморфизма во время выполнения
+class Figure {
+  double dim1;
+  double dim2; 
 
+  Figure(double a, double b) {
+    dim1 = a;
+    dim2 = b;
+  }
 
+  double area() {
+    System.out.println("Area for Figure is undefined.");
+    return 0;
+  }
+}
 
+class Rectangle extends Figure {
+  Rectangle(double a, double b) {
+    super(a, b);
+  }
 
+  // override area for rectangle
+  double area() {
+    System.out.println("Inside Area for Rectangle.");
+    return dim1 * dim2;
+  }
+}
 
+class Triangle extends Figure {
+  Triangle(double a, double b) {
+    super(a, b);
+  }
 
+  // override area for right triangle
+  double area() {
+    System.out.println("Inside Area for Triangle.");
+    return dim1 * dim2 / 2;
+  }
+}
 
+class FindAreas {
+  public static void main(String args[]) {
+    Figure f = new Figure(10, 10);
+    Rectangle r = new Rectangle(9, 5);
+    Triangle t = new Triangle(10, 8);
+    
+    Figure figref;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    figref = r;
+    System.out.println("Area is " + figref.area());
+    
+    figref = t;
+    System.out.println("Area is " + figref.area());
+    
+    figref = f;
+    System.out.println("Area is " + figref.area());
+  }
+}
 
 
 
