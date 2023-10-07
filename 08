@@ -1,0 +1,277 @@
+                                                                              //Chapter08
+
+
+        //Пример простого наследлования
+class A {
+  int i, j;
+
+  void showij() {
+    System.out.println("i and j: " + i + " " + j);
+  }
+}
+
+// создать подкласс путем расширения класса А
+class B extends A {
+  int k;
+
+  void showk() {
+    System.out.println("k: " + k);
+  }
+  void sum() {
+    System.out.println("i+j+k: " + (i+j+k));
+  }
+}
+  
+class SimpleInheritance {
+  public static void main(String args[]) {
+    A superOb = new A();
+    B subOb = new B();
+
+    // суперкласс может использоваться самостоятельно
+    superOb.i = 10;
+    superOb.j = 20;
+    System.out.println(" Coдepжимoe объекта superOb: ");
+    superOb.showij();
+    System.out.println();
+
+    // Подкласс име ет доступ ко всем открытым членам своего суперкласса
+       
+    subOb.i = 7;
+    subOb.j = 8;
+    subOb.k = 9; 
+    System.out.println(" Coдepжимoe объекта subOb: ");
+    subOb.showij();
+    subOb.showk();
+    System.out.println();
+
+    System.out.println("Сумма of i, j and k в обьекте subOb:");
+    subOb.sum();
+  }
+}
+  /*  Вывод:  Содержимое объекта superOb :
+              i и j: 10 20
+              Содержимое объекта subOЬ :
+              i и j: 7 в
+              k: 9
+              Сумма i, j и k в объекте subOЬ :
+              i+j+k: 24        */
+
+
+
+        //Пример ошибки компиляции изза private
+//В иерархии классов закрытые члены остаются закрытыми в пределах своего класса . Эта программа содержит ошибку, и поэтому компилировать ее не удастся.
+//создать суперкласс
+class A {
+  int i; // этот член открыт по умолчанию,
+  private int j; // а этот член закрыт в классе А
+
+  void setij(int x, int y) {
+    i = x;
+    j = y;
+  }
+}
+
+// Член j класса А в этом классе недоступен
+class B extends A {
+  int total;
+
+  void sum() {
+    total = i + j; // ОШИБКА: член j в э том классе недоступен
+  }
+}
+  
+class Access {
+  public static void main(String args[]) {
+    B subOb = new B();
+
+    subOb.setij(10, 12);
+
+    subOb.sum();
+    System.out.println("Cyммa равна " + subOb.total);
+  }
+}
+
+
+
+
+      //Пример с наследованием для расширения класса Вох
+class Box {
+  double width;
+  double height;
+  double depth;
+
+  // сконструировать клон объекта
+  Box(Box ob) { // pass object to constructor
+    width = ob.width;
+    height = ob.height;
+    depth = ob.depth;
+  }
+
+  // конструктор, применяемый при указании всех размеров
+  Box(double w, double h, double d) {
+    width = w;
+    height = h;
+    depth = d;
+  }
+
+  // конструктор, применяемый в отсутствие размеров
+  Box() {
+    width = -1;  // use -1 to indicate
+    height = -1; // an uninitialized
+    depth = -1;  // box
+  }
+
+  // конструктор , применяемый при создании куба
+  Box(double len) {
+    width = height = depth = len;
+  }
+
+  // рассчитать и возвратить объем
+  double volume() {
+    return width * height * depth;
+  }
+}
+
+// расширить класс Вох, включив в него поле веса
+class BoxWeight extends Box {
+  double weight; // вес параллелепипеда
+
+  // конструктор BoxWeight()
+  BoxWeight(double w, double h, double d, double m) {
+    width = w;
+    height = h;
+    depth = d;
+    weight = m;
+  }    
+}
+  
+class DemoBoxWeight {
+  public static void main(String args[]) {
+    BoxWeight mybox1 = new BoxWeight(10, 20, 15, 34.3);
+    BoxWeight mybox2 = new BoxWeight(2, 3, 4, 0.076);
+    double vol;
+
+    vol = mybox1.volume();
+    System.out.println("Обьем of mybox1 равен " + vol);
+    System.out.println("Вес of mybox1 равен " + mybox1.weight);
+    System.out.println();
+
+    vol = mybox2.volume();
+    System.out.println("Обьем of mybox2 равен " + vol);
+    System.out.println("Вес of mybox2 равен " + mybox2.weight);
+  }
+}
+/*  Вывод:    Объем mybox l равен 3000.0
+              Вес mybox l равен 34.3
+              Объем mybox2 равен 24.О
+              Вес mybox2 равен 0.076        */
+
+
+
+
+          !!!Пример переменной суперкласса которая ссылвается на обьект подкласса
+class RefDemo {
+  public static void main(String args[]) {
+    BoxWeight weightbox = new BoxWeight(3, 5, 7, 8.37);
+    Box plainbox = new Box();
+    double vol;
+
+    vol = weightbox.volume();
+    System.out.println("Обьем of weightbox равен " + vol);
+    System.out.println("Вес of weightbox равен" + weightbox.weight);
+    System.out.println();
+
+    // nрисвоить ссылке на объект ВO:itWeight ссылки на объект Вoх
+    plainbox = weightbox;   Верно , т.к. метод volume() определен в классе Вох
+    System.out.println("Обьем of plainbox равен " + vol);
+
+    /* Следующий оператор ошибочен , поскольку член plainЬox
+не определяет член weight . */
+//  System.out.println("Вес of plainbox равен " + plainbox.weight);
+  }
+}
+/* В данном примере член we ightbox содержит ссьшку на объекты класса
+BoxWe ight, а член раinЬох-ссылкунаобъекты класса Вох. А посколъкуВохWе ight ­
+это подкласс, производный от класса Вох, то его члену painbox можно присвоить
+ссЬVIку на объект we igh tbox. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
