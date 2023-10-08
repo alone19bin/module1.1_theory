@@ -1,1 +1,509 @@
                                                                                   //Chapter09
+
+
+        //Пример модификаторов защиты доступа
+//package p1
+public class Protection {
+  int n = 1;
+  private int n_pri = 2;
+  protected int n_pro = 3;
+  public int n_pub = 4;
+
+  public Protection() {
+    System.out.println("кoнcтpyктop базового класса");
+    System.out.println("n = " + n);
+    System.out.println("n_pri = " + n_pri);
+    System.out.println("n_pro = " + n_pro);
+    System.out.println("n_pub = " + n_pub);
+  }
+}
+
+class Derived extends Protection {
+  Derived() {
+    System.out.println("кoнcтpyктop подкласса");
+    System.out.println("n = " + n);
+
+//  доступно только для класса
+//  System.out.println("n_pri = " + n_pri);
+
+    System.out.println("n_pro = " + n_pro);
+    System.out.println("n_pub = " + n_pub);
+  }
+}
+
+class SamePackage {
+  SamePackage() {
+    Protection p = new Protection();
+    System.out.println("кoнcтpyктop этого же пакета");
+    System.out.println("n = " + p.n);
+
+//  доступно только для класса
+//  System.out.println("n_pri = " + p.n_pri);
+
+    System.out.println("n_pro = " + p.n_pro);
+    System.out.println("n_pub = " + p.n_pub);
+  }
+}
+//package p2
+class Protection2 extends p1.Protection {
+  Protection2() {
+    System.out.println(""конструктор , унаследованный иэ другого пакета");
+//  доступно толь ко для данного класса или пакета
+//  System.out.println("n = " + n);
+
+//  доступно только для данного класса
+//  System.out.println("n_pri = " + n_pri);
+
+    System.out.println("n_pro = " + n_pro);
+    System.out.println("n_pub = " + n_pub);
+  }
+}
+
+class OtherPackage {
+  OtherPackage() {
+    p1.Protection p = new p1.Protection();
+    System.out.println("кoнcтpyктop иэ другого пакета")
+
+//  cдоступно только для данного класса или пакета
+//  System.out.println("n = " + p.n);
+
+//  доступно только для данного класса
+//  System.out.println("n_pri = " + p.n_pri);
+
+//  доступно только для данного класса, подкласса или пакета
+//  System.out.println("n_pro = " + p.n_pro);
+
+    System.out.println("n_pub = " + p.n_pub);
+  }
+}
+
+
+      //Примеры интерфейсов
+interface Callback {
+  void callback(int param);
+}
+class Client implements Callback {
+  //реализовать интерфейс CallЬack
+  public void callback(int p) {
+    System.out.println("Метод callback ( ) , вызываемый со значением " + р ) ;
+  }
+}
+class Client implements Callback {
+  // реализовать интерфейс CallЬack
+  public void callback(int p) {
+    System.out.println("callback called with " + p);
+  }
+
+  void nonIfaceMeth() {
+    System.out.println(" B классах , реализующих интерфейсы , " + " могут определяться и другие члены.") ;
+  }
+}
+
+
+
+
+/*   Если класс включает в себя интерфейс, но не полностью реализует определен-
+ные в нем методы, он должен быть объявлен как abstract:
+abstract class Incomplete implements Callback {
+  int a, b;
+  void show() {
+    System.out.println(a + " " + b);
+  }
+  // ...
+}       
+
+
+
+Интерфейс может бьrгь объявлен членом класса или другого интерфейса. Такой интерфейс называется иитерфейсом-члном или вложенным иитерфейсом. Вложенный интерфейс может быть объявлен как public, 
+private или protected.
+
+        !!!//Пример вложенного интерфейса
+class A {
+  // это вложенный интерфейс
+  public interface NestedIF {
+    boolean isNotNegative(int x);
+  }
+}
+
+//Класс В реализует вложенный интерфейс
+class B implements A.NestedIF {
+  public boolean isNotNegative(int x) {
+    return x < 0 ? false : true;
+  }
+}
+
+class NestedIFDemo {
+  public static void main(String args[]) {
+
+    // исполь зовать ссылку на вложенный интерфейс
+    A.NestedIF nif = new B();
+
+    if(nif.isNotNegative(10))
+      System.out.println("Чиcлo 10 неотрицательное");
+    if(nif.isNotNegative(-12))
+      System.out.println("Этo не будет выведено");
+  }
+}
+
+Вывод: Чиcлo 10 неотрицательное
+*/
+
+
+
+              !!!//Пример реализации интерфейса IntStack для стека фиксированного размера
+//Определить интерфейс для целочисленного стека
+interface IntStack {
+  void push(int item); // сохранить элемент в стеке
+  int pop(); // извлечь элемент из стека
+
+
+// Реализация интерфейса IntStack для стека фиксированного размера
+class FixedStack implements IntStack {
+  private int stck[];
+  private int tos;
+
+  //выделить память и инициализировать стек
+  FixedStack(int size) {
+    stck = new int[size];
+    tos = -1;
+  }
+
+  // разместить элемент в стеке
+  public void push(int item) {
+    if(tos==stck.length-1) // использовать поле длины стека
+      System.out.println(""Cтeк заполнен.");
+    else 
+      stck[++tos] = item;
+  }
+
+  // извлечь элемент из стека
+  public int pop() {
+    if(tos < 0) {
+      System.out.println("Cтeк не загружен.")
+      return 0;
+    }
+    else 
+      return stck[tos--];
+  }
+}
+
+class IFTest {
+  public static void main(String args[]) {
+    FixedStack mystack1 = new FixedStack(5);
+    FixedStack mystack2 = new FixedStack(8);
+
+    // разместить числа в стеке
+    for(int i=0; i<5; i++) mystack1.push(i);
+    for(int i=0; i<8; i++) mystack2.push(i);
+
+    // извлечь эти числа из стека
+    System.out.println("Стек in mystack1:");
+    for(int i=0; i<5; i++) 
+       System.out.println(mystack1.pop());
+
+    System.out.println("Стек in mystack2:");
+    for(int i=0; i<8; i++) 
+       System.out.println(mystack2.pop());
+  }
+}
+/*   Вывод:     4
+                3
+                2
+                1
+                0
+                Стек in mystack2:
+                7
+                6
+                5
+                4
+                3
+                2
+                1
+                0
+                             */
+
+
+
+                //Пример еще одой реализация интерфейса IntStack, в которой с помощью того же самого определения interfасе создается динамический стек. В этой реализации каждый стек создается с первоначальной 
+длиной. При превышении этой начальной длины размер стека увеличивается. Каждый раз, когда возникает потребность в дополнительном свободном месте, размер стека удваивается.
+
+
+!!!//Реализация " наращиваемого" стека
+class DynStack implements IntStack {
+  private int stck[];
+  private int tos;
+
+  // выделить память и инициализировать стек
+  DynStack(int size) {
+    stck = new int[size];
+    tos = -1;
+  }
+
+  // разместить элемент в стеке
+  public void push(int item) {
+    // если стек заполнен, выделить память под стек большего размера
+    if(tos==stck.length-1) {
+      int temp[] = new int[stck.length * 2]; // удвоить размер стека
+      for(int i=0; i<stck.length; i++) temp[i] = stck[i];
+      stck = temp;
+      stck[++tos] = item;
+    }
+    else 
+      stck[++tos] = item;
+  }
+
+  //извлечь элемент из стека
+  public int pop() {
+    if(tos < 0) {
+      System.out.println("Cтeк не загружен");
+      return 0;
+    }
+    else 
+      return stck[tos--];
+  }
+}
+
+class IFTest2 {
+  public static void main(String args[]) {
+    DynStack mystack1 = new DynStack(5);
+    DynStack mystack2 = new DynStack(8);
+
+    // В э тих циклах увеличиваются размеры каждого стека
+    for(int i=0; i<12; i++) mystack1.push(i);
+    for(int i=0; i<20; i++) mystack2.push(i);
+
+    System.out.println("Stack in mystack1:");
+    for(int i=0; i<12; i++) 
+       System.out.println(mystack1.pop());
+
+    System.out.println("Stack in mystack2:");
+    for(int i=0; i<20; i++) 
+       System.out.println(mystack2.pop());
+  }
+}
+
+
+!!!/*В приведенном ниже примере программы создается класс, в котором используются обе реализации данного интерфейса в классах FixedStack и DynStack. Для этого применяется ссылка на интерфейс. 
+Это означает, что поиск вариантов при вызове методов push ( ) и рор ( ) осуществляется во время выполнения, а не во время компиляции.  */
+
+/* Создать переменную интерфейса и
+обратиться к стекам через нее .
+
+class IFTest3 {
+  public static void main(String args[]) {
+    IntStack mystack; //создать переменную ссылки на интерфейс
+    DynStack ds = new DynStack(5);
+    FixedStack fs = new FixedStack(8);
+
+    mystack = ds; // lзагрузить динамический стек
+    // push some numbers onto the stack
+    for(int i=0; i<12; i++) mystack.push(i);
+
+    mystack = fs; //загрузить фиксированный стек
+    for(int i=0; i<8; i++) mystack.push(i);
+
+
+    mystack = ds; 
+    System.out.println("Знaчeния в динамическом стеке:");
+    for(int i=0; i<12; i++) 
+       System.out.println(mystack.pop());
+
+    mystack = fs;
+    System.out.println("Знaчeния в фиксированном стеке:");
+    for(int i=0; i<8; i++) 
+       System.out.println(mystack.pop());
+  }
+}
+
+
+
+              //Пример перемеенных в интерфейсе
+import java.util.Random;
+
+interface SharedConstants {
+  int NO = 0;
+  int YES = 1;
+  int MAYBE = 2;
+  int LATER = 3;
+  int SOON = 4;
+  int NEVER = 5;
+}
+
+class Question implements SharedConstants {
+  Random rand = new Random();
+  int ask() {
+    int prob = (int) (100 * rand.nextDouble());
+    if (prob < 30)
+      return NO;           // 30%
+    else if (prob < 60)
+      return YES;          // 30%
+    else if (prob < 75)
+      return LATER;        // 15%
+    else if (prob < 98)
+      return SOON;         // 13%
+    else
+      return NEVER;        // 2%
+  }
+}
+
+class AskMe implements SharedConstants {
+  static void answer(int result) {
+    switch(result) {
+      case NO:
+        System.out.println("Нет");
+        break;
+      case YES:
+        System.out.println("Да");
+        break;
+      case MAYBE:
+        System.out.println("Возможно");
+        break;
+      case LATER:
+        System.out.println("Позже");
+        break;
+      case SOON:
+        System.out.println("Скоро");
+        break;
+      case NEVER:
+        System.out.println("Никогда");
+        break;
+    }
+  }
+
+  public static void main(String args[]) {
+    Question q = new Question();
+    answer(q.ask());
+    answer(q.ask());
+    answer(q.ask());
+    answer(q.ask());
+  }
+}
+
+/*    В данном примере применяется методe nextDouЫe (), возвращающий случайные числа в пределах от О,О до 1,О. В рассматриваемом здесь примере программы два класса, Question и AskMe , реализуют интерфейс 
+SharedConstants, в котором определены константы NO (Нет) , YES (Да) , МАУВЕ (Возможно), SOON (Вскоре), LATER (Позднее) и NEVER (Никогда). Код из каждого класса ссылается на эти константы так, как если бы они
+определялись и наследовались непосредственно в каждом классе. Ниже приведен результат, выводимый при выполнении данной программы. Обратите внимание на то, что при каждом запуске программы результаты ее 
+выполнения оказываются разными.    */
+
+
+              //Пример расширения интерфейсов
+interface A {
+  void meth1();
+  void meth2();
+}
+
+// B now includes meth1() and meth2() -- it adds meth3().
+interface B extends A {
+  void meth3();
+}
+
+// Теперь интерфейс В включает в себя ме тоды methl () и meth2 () и добавляет метод mеth3 ()
+class MyClass implements B {
+  public void meth1() {
+    System.out.println("Peaлизaция метода meth1()");
+  }
+
+  public void meth2() {
+    System.out.println("Peaлизaция метода meth2().");
+  }
+
+  public void meth3() {
+    System.out.println("Peaлизaция метода meth3().");
+  }
+}
+
+class IFExtend {
+  public static void main(String arg[]) {
+    MyClass ob = new MyClass();
+
+    ob.meth1();
+    ob.meth2();
+    ob.meth3();
+  }
+}
+
+
+
+
+
+
+/*    Главное отличие состоит в том, что в начале объявления метода по умолчанию указывается ключевое слово default.          
+public interface MyIF { 
+  // Это объявление обычного метода в интерфейсе. Он НЕ предоставляет реализацию по умолчанию
+  int getNumber(); 
+ 
+  // А это объявление метода по умолчанию .Обратите внимание на его реализацию по умолчанию 
+  default String getString() { 
+    return "Объект типа St ring по умолчанию"; 
+  } 
+}
+
+
+объявление метода ge tString () включена его реализация по умолчанию, его совсем не обязательно переопределять в классе, реализующем интерфейс MyIF.
+//Реализовать интерфейс МyIF
+class MyIFImp implements MyIF { 
+  // В этом классе должен быть реализован только метод qetNuJllЬer() определенный в интерфейсе МyIF 
+  // А вызов метода qetStrinq () разрешается по умолчанию
+  public int getNumber() { 
+    return 100; 
+  } 
+}
+
+В следующем примере кода получается экземпляр класса MyI Fimp, который используется для вызова обоих методов, ge tNumЬer () и get String ():
+class DefaultMethodDemo { 
+  public static void main(String args[]) { 
+ 
+    MyIFImp obj = new MyIFImp(); 
+ 
+    // Метод qetNWllЬer ( ) можно вызвать , т.к. он явно реализован в классе МyIFimp: 
+    System.out.println(obj.getNumber()); 
+ 
+    // Метод getStrinq () также можно вызвать, т.к. в интерфейсе имеется его реализация по умолчанию :
+    System.out.println(obj.getString()); 
+  } 
+}
+Вывод:        100  
+              Объект типа St ring по умолчанию
+
+
+  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
