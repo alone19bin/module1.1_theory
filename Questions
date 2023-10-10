@@ -97,10 +97,10 @@ public final void wait() throws InterruptedException {
 
 
 
-
-
-
-
+         8)Методы в интерфейсах, Какой модификатор доступа, Default методы
+-методы по умолчанию, все методы и переменные неявно объявляются в интерфейсе как public
+-static  
+private
 
 
 
